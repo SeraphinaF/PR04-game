@@ -1,6 +1,6 @@
 import { Actor, Engine, Vector, Color } from "excalibur"
 
-class Obstacles {
+class ObstacleManager {
     obstacle_list : Array<Actor>
 
     constructor(engine: Engine) {
@@ -25,4 +25,4 @@ class Obstacles {
     }
 }
 
-export default Obstacles
+export default ObstacleManager

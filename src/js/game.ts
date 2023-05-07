@@ -1,7 +1,7 @@
 import '../css/style.css'
 import { Actor, Engine, Vector, Color } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
-import Obstacles from './obstacles'
+import ObstacleManager from './obstacles'
 
 export class Game
 {
@@ -32,7 +32,7 @@ export class Game
         })
         this.engine.add(ground)
 
-        const obstacles = new Obstacles(this.engine)
+        const obstacle_manager = new ObstacleManager(this.engine)
 
     }
 
