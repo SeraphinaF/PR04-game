@@ -1,7 +1,9 @@
 import { Actor, Engine, Vector, Color } from "excalibur"
 
 class Obstacles {
-    constructor() {
+    obstacle_list : Array<Actor>
+
+    constructor(engine: Engine) {
         this.obstacle_list = []
         const distance_between = 80
         for (let i = 0; i < 4; i++) {
@@ -13,6 +15,7 @@ class Obstacles {
                 color: Color.Green
             })
             obstacle.vel = new Vector(-10, 0)
+            engine.add(obstacle)
             this.obstacle_list.push(obstacle)
         }
     }

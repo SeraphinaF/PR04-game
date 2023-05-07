@@ -3,14 +3,15 @@ import { Actor, Engine, Vector, Color } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
 import Obstacles from './obstacles'
 
+export class Game
+{
+    engine: Engine
+    constructor()
+    {
+        this.engine = new Engine({width: 500, height: 500})
+        this.engine.start(ResourceLoader).then(() => this.startGame())
 
-export class Game extends Engine {
-
-    constructor() {
-        super({ width: 500, height: 500 })
-        this.start(ResourceLoader).then(() => this.startGame())
     }
-
     startGame() {
         const bird = new Actor({
             x: 150,
@@ -20,7 +21,7 @@ export class Game extends Engine {
             color: Color.Green
         })
         bird.vel = new Vector(0, 0)
-        this.add(bird)
+        this.engine.add(bird)
 
         const ground = new Actor({
             x: 250,
@@ -29,14 +30,16 @@ export class Game extends Engine {
             height: 20,
             color: Color.Green
         })
-        this.add(ground)
+        this.engine.add(ground)
 
-        const obstacles = new Obstacles()
-        obstacles.getObstacles().forEach(obstacle => this.add(obstacle))
+        const obstacles = new Obstacles(this.engine)
+
     }
 
-    collision() {
-
+    gameloop()
+    {
+        while(true)
+        {}
     }
 }
 
