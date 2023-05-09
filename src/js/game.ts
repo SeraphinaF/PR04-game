@@ -1,28 +1,25 @@
 import '../css/style.css'
-import { Actor, Engine, Vector, Color } from "excalibur"
+import { Actor, Engine, Vector, Color, Input } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
-import ObstacleManager from './obstacles'
+import { ObstacleManager } from './obstacles'
+import { Bird } from './bird'
 
-export class Game
-{
+export class Game {
     engine: Engine
-    constructor()
-    {
-        this.engine = new Engine({width: 500, height: 500})
+    obstacle_manager: ObstacleManager
+    bird: Bird
+
+    constructor() {
+        this.engine = new Engine({ width: 500, height: 500 })
         this.engine.start(ResourceLoader).then(() => this.startGame())
 
-    }
-    startGame() {
-        const bird = new Actor({
-            x: 150,
-            y: 460,
-            width: 50,
-            height: 50,
-            color: Color.Green
-        })
-        bird.vel = new Vector(0, 0)
-        this.engine.add(bird)
+        this.obstacle_manager = new ObstacleManager(this.engine)
+        this.bird = new Bird(this.engine, 150, 460, 50, 50, Color.Green)
 
+
+    }
+
+    startGame() {
         const ground = new Actor({
             x: 250,
             y: 490,
@@ -31,15 +28,26 @@ export class Game
             color: Color.Green
         })
         this.engine.add(ground)
-
-        const obstacle_manager = new ObstacleManager(this.engine)
-
     }
 
-    gameloop()
-    {
-        while(true)
-        {}
+    check_keypress() {
+     this.engine.input.keyboard.on('down', (evt)=>{
+        if(evt.key === Input.Keys.Space){
+            return true;
+        }else{
+            return false
+        }
+     })
+    }
+
+    gameloop() {
+        while (true) {
+            this.obstacle_manager.update()
+            if (this.check_keypress()) {
+                this.bird.jump()
+            }
+
+        }
     }
 }
 

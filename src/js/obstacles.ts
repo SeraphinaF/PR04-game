@@ -1,10 +1,10 @@
 import { Actor, Engine, Vector, Color } from "excalibur"
 
-class ObstacleManager {
-    obstacle_list : Array<Actor>
+export class ObstacleManager {
+    obstacles : Array<Actor>
 
     constructor(engine: Engine) {
-        this.obstacle_list = []
+        this.obstacles = []
         const distance_between = 80
         for (let i = 0; i < 4; i++) {
             let obstacle = new Actor({
@@ -16,13 +16,16 @@ class ObstacleManager {
             })
             obstacle.vel = new Vector(-10, 0)
             engine.add(obstacle)
-            this.obstacle_list.push(obstacle)
+            this.obstacles.push(obstacle)
         }
     }
 
-    getObstacles() {
-        return this.obstacle_list
+    getObstacles() : Array<Actor>{
+        return this.obstacles
+    }
+
+    update(){
+
     }
 }
 
-export default ObstacleManager
