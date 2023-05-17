@@ -1,6 +1,5 @@
 // import '../css/style.css'
 import { Actor, Engine, Vector, Color, Input } from "excalibur"
-import { KeyEvent } from "excalibur/build/dist/Input/Keyboard";
 import { ObstacleManager } from './obstacles'
 import { Bird } from './bird'
 
@@ -12,8 +11,6 @@ export class Game {
     constructor() {
         this.engine = new Engine({ width: 500, height: 500 });
         this.engine.start().then(() => { this.gameloop() });
-
-
         this.obstacle_manager = new ObstacleManager(this.engine);
         this.bird = new Bird(this.engine, 150, 460, 50, 50, Color.Green);
     }

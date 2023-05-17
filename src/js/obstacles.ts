@@ -11,10 +11,10 @@ export class ObstacleManager {
                 x: 400 + distance_between * i,
                 y: 490,
                 width: 20,
-                height:Math.random() * (400 - 30) + 30,
+                height:Math.random() * (300 - 30) + 30,
                 color: Color.Green
             })
-            obstacle.vel = new Vector(-100, 0)
+            obstacle.vel = new Vector(-150, 0)
             engine.add(obstacle)
             this.obstacles.push(obstacle)
         }
