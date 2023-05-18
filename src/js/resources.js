@@ -1,11 +1,11 @@
 import { ImageSource, Sound, Resource, Loader } from 'excalibur'
 import backgroundImage from '../images/background.png'
-import kangarooImage from '../images/kangaroo.png'
+import birdImage from '../images/kangaroo.png'
 
 const Resources = {
     Background: new ImageSource(backgroundImage),
-    Kangaroo: new ImageSource(kangarooImage)
+    Bird: new ImageSource(birdImage)
 }
-const ResourceLoader = new Loader([Resources.Background, Resources.Kangaroo])
+const ResourceLoader = new Loader([Resources.Background, Resources.bird])
 
 export { Resources, ResourceLoader }
