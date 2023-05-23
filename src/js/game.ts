@@ -36,6 +36,10 @@ export class Game {
         // this.engine.add(ground);
     }
 
+    score(){
+        
+    }
+
     gameloop() {
         this.startGame();
         }
