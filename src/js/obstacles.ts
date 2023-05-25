@@ -1,11 +1,14 @@
-import { Actor, Engine, Vector, Color } from "excalibur"
+import { Actor, Engine, Vector, Color, Trigger } from "excalibur"
 
 export class ObstacleManager {
     obstacles: Array<Actor>
-
-    constructor(engine: Engine) {
+    birdPos: number
+    score: number
+    constructor(engine: Engine, bird_x:number) {
+        this.birdPos = bird_x
         let obstacleCount = 0
         this.obstacles = []
+        this.score = 0
         const distance_between = 350
         for (let i = 0; i < 50; i++) {
             let obstacle = new Actor({
@@ -15,12 +18,29 @@ export class ObstacleManager {
                 height: Math.random() * (300 - 30) + 30,
                 color: Color.Green
             })
+            const triggerScore = new Trigger({
+            width:bird_x,
+            height: obstacle.pos.y,
+            pos: obstacle.pos,  
+             action: () =>{
+                console.log("Triggerrrrrreddd")
+             }
+            })
+
             obstacle.vel = new Vector(-130, 0)
             engine.add(obstacle)
             this.obstacles.push(obstacle)
-            obstacleCount++
-            console.log(obstacleCount)
         }
+    }
+
+    score(){
+       let score = 0
+        this.obstacles.forEach(
+            obstacle => {if (obstacle.pos.x < this.birdPos ){
+                score++
+            }}
+        )
+        console.log(score)
     }
 
     getObstacles(): Array<Actor> {

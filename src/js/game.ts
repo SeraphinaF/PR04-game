@@ -16,15 +16,14 @@ export class Game {
         this.engine = new Engine({ width: 500, height: 500 });
         this.engine.start().then(() => { this.gameloop() });
         this.background = new Background(this.engine, innerWidth, innerHeight)
-        this.obstacle_manager = new ObstacleManager(this.engine);
+        this.obstacle_manager = new ObstacleManager(this.engine, 150);
         this.bird = new Bird(this.engine, 150, groundpos, 50, 50, Color.Green);
     }
 
     startGame() {
         const background = new Actor({
             width:innerWidth,
-            height:innerHeight,
-            
+            height:innerHeight,   
         })
         // const ground = new Actor({
         //     x: 250,
@@ -36,7 +35,8 @@ export class Game {
         // this.engine.add(ground);
     }
 
-    score(){
+
+    updateGame(){
         
     }
 
