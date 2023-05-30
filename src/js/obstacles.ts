@@ -1,4 +1,5 @@
 import { Actor, Engine, Vector, Color, Trigger } from "excalibur"
+import { Resources } from "./resources"
 
 export class ObstacleManager {
     obstacles: Array<Actor>
@@ -26,7 +27,8 @@ export class ObstacleManager {
                 console.log("Triggerrrrrreddd")
              }
             })
-
+            obstacle.graphics.use(Resources.Obstacle.toSprite())
+            // obstacle.height = Math.random() * (300 - 30) + 30
             obstacle.vel = new Vector(-130, 0)
             engine.add(obstacle)
             this.obstacles.push(obstacle)

@@ -12,12 +12,12 @@ export class Game {
     bird: Bird
 
     constructor() {
-        const groundpos = 467
-        this.engine = new Engine({ width: 500, height: 500 });
-        this.engine.start().then(() => { this.gameloop() });
-        this.background = new Background(this.engine, innerWidth, innerHeight)
-        this.obstacle_manager = new ObstacleManager(this.engine, 150);
-        this.bird = new Bird(this.engine, 150, groundpos, 50, 50, Color.Green);
+        const groundpos = 397
+        this.engine = new Engine({ width: innerWidth, height: innerHeight });
+        this.engine.start(ResourceLoader).then(() => { this.gameloop() });
+        this.background = new Background(this.engine, 50,50, 2800, 1000, Color.Green)
+        this.obstacle_manager = new ObstacleManager(this.engine, 150);        
+        this.bird = new Bird(this.engine, 150, groundpos, 50, 50, Color.Green );
     }
 
     startGame() {
