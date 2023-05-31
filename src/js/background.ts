@@ -40,9 +40,3 @@ export class Background extends Actor{
         }
     }
 }
-//         this.graphics.use(Resources.Background.toSprite())
-//         this.pos = new Vector(250,150)
-
-//         console.log('get background')
-//     }
-// }

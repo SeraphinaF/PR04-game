@@ -4,20 +4,24 @@ import { Resources, ResourceLoader } from "./resources"
 import { Background } from "./background"
 import { ObstacleManager } from './obstacles'
 import { Bird } from './bird'
+import { Powerup } from './powerup'
 
 export class Game {
     engine: Engine
     background: Background
     obstacle_manager: ObstacleManager
     bird: Bird
+    powerup: Powerup
 
     constructor() {
         const groundpos = 397
         this.engine = new Engine({ width: innerWidth, height: innerHeight });
         this.engine.start(ResourceLoader).then(() => { this.gameloop() });
-        this.background = new Background(this.engine, 50,50, 2800, 1000, Color.Green)
-        this.obstacle_manager = new ObstacleManager(this.engine, 150);        
-        this.bird = new Bird(this.engine, 150, groundpos, 50, 50, Color.Green );
+        this.background = new Background(this.engine, 50,50, 200, 200, Color.Green)
+        this.obstacle_manager = new ObstacleManager(this.engine, 150,);        
+        this.powerup = new Powerup(this.engine, this.bird)
+        this.bird = new Bird(this.engine, this.powerup, 150, groundpos, 200, 150, Color.Green );
+        this.engine.showDebug(true)
     }
 
     startGame() {

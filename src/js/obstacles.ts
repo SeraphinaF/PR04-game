@@ -7,42 +7,29 @@ export class ObstacleManager {
     score: number
     constructor(engine: Engine, bird_x:number) {
         this.birdPos = bird_x
-        let obstacleCount = 0
         this.obstacles = []
         this.score = 0
         const distance_between = 350
         for (let i = 0; i < 50; i++) {
             let obstacle = new Actor({
                 x: 400 + distance_between * i,
-                y: 490,
+                y: 470,
                 width: 20,
-                height: Math.random() * (300 - 30) + 30,
+                height: 200,
                 color: Color.Green
             })
-            const triggerScore = new Trigger({
-            width:bird_x,
-            height: obstacle.pos.y,
-            pos: obstacle.pos,  
-             action: () =>{
-                console.log("Triggerrrrrreddd")
-             }
-            })
             obstacle.graphics.use(Resources.Obstacle.toSprite())
-            // obstacle.height = Math.random() * (300 - 30) + 30
             obstacle.vel = new Vector(-130, 0)
             engine.add(obstacle)
             this.obstacles.push(obstacle)
         }
     }
-
-    score(){
-       let score = 0
-        this.obstacles.forEach(
-            obstacle => {if (obstacle.pos.x < this.birdPos ){
-                score++
-            }}
-        )
-        console.log(score)
+    
+    on(arg0: string, arg1: (event: any) => any) {
+        throw new Error("Method not implemented.")
+    }
+    gameOver() {
+        throw new Error("Method not implemented.")
     }
 
     getObstacles(): Array<Actor> {
