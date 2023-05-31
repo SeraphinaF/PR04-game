@@ -1,6 +1,7 @@
 import { Actor, Engine, Vector, Color, Input, Label, Font, CollisionType } from "excalibur"
 import { Resources } from "./resources"
 import { Powerup } from "./powerup"
+import { ObstacleManager } from "./obstacles"
 
 export class Bird extends Actor {
   groundPos: number
@@ -15,18 +16,18 @@ export class Bird extends Actor {
     this.engine = engine
     this.powerup = powerup
     this.graphics.use(Resources.Bird.toSprite())
-    this.scale = new Vector(-0.4, 0.4)
+    this.scale = new Vector(0.4, 0.4)
     engine.add(this)
 
-    this.collisionType = CollisionType.Active; // Set collision type to Active
+    this.on('collisionstart', (event) => this.hitSomething(event))
+  }
 
-    this.on('precollision', (event) => {
-      const other = event.other;
-      if (other instanceof Powerup) {
-        // Handle powerup collision
-        this.handlePowerupCollision(other);
-      }
-    });
+  hitSomething(event) {
+    console.log('I am flying!')
+    console.log(event)
+    if (event.other instanceof Powerup) {
+      this.handlePowerupCollision(event.other);
+    }
   }
 
   handlePowerupCollision(powerup: Powerup) {

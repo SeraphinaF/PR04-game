@@ -29,19 +29,9 @@ export class Game {
             width:innerWidth,
             height:innerHeight,   
         })
-        // const ground = new Actor({
-        //     x: 250,
-        //     y: 490,
-        //     width: 500,
-        //     height: 20,
-        //     color: Color.Green
-        // })
-        // this.engine.add(ground);
     }
 
-
     updateGame(){
-        
     }
 
     gameloop() {
