@@ -1,7 +1,7 @@
 import { Actor, Engine, Vector, Color, GraphicsGroup} from "excalibur"
 import { Resources } from "./resources"
 
-export class Background extends Actor{
+export class BgDaytime extends Actor{
 
     engine: Engine
     constructor(engine:Engine, x:number, y:number, width: number, height: number, color: Color){
