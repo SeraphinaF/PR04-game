@@ -1,20 +1,21 @@
 import { Engine, Scene, Color } from 'excalibur'
 import { BgDaytime } from './background'
+import { BgNighttime } from './background'
 
 export class LevelDay extends Scene {
-    bgDaytime: BgDaytime
-    
-    onInitialize(_engine: Engine): void {
-        this.engine.backgroundColor = Color.Green 
+
+    engine:Engine 
+
+    onInitialize(engine){
+        this.engine = new BgDaytime(this.engine, 0, 0, this.engine.canvasWidth, this.engine.canvasHeight)
     }
-  
 }
 
 export class LevelNight extends Scene {
-    engine: Engine
+    bgNighttime: BgNighttime
 
-    onInitialize() {
-        this.engine.backgroundColor = Color.Blue
+    onInitialize(_engine: Engine): void{
+        this.bgNighttime = new BgNighttime(this.engine, 0, 0, this.engine.canvasWidth, this.engine.canvasHeight)
     }
 }
 

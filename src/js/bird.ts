@@ -4,7 +4,7 @@ import { Powerup } from "./powerup"
 import { Tree, ObstacleManager } from "./obstacles"
 
 let gravity = 0.4; // Adjust the gravity strength as needed
-let jumpVelocity = -15; // Adjust the initial jump velocity as needed
+let jumpVelocity = -13; // Adjust the initial jump velocity as needed
 let maxFallVelocity = 10; // Adjust the maximum fall velocity as needed
 
 export class Bird extends Actor {

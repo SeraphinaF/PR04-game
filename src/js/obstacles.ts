@@ -73,14 +73,8 @@ export class ObstacleManager {
             });
             this.engine.currentScene.add(this.scoreLabel);
         }
+        return this.score
     }
-
-    // addSpeed(){
-    //     if (this.score % 5 === 0 && this.score > 0 ){
-    //         this.tree.vel.x = -150
-    //         console.log("added speed!")
-    //     }
-    // }
 
     test() {
         console.log('hoi')

@@ -1,48 +1,59 @@
 // import '../css/style.css'
-import { Actor, Engine, Vector, Color, Input } from "excalibur"
+import { Actor, Engine, Vector, Color, Input, Scene } from "excalibur"
 import { Resources, ResourceLoader } from "./resources"
-// import { BgDaytime } from "./background"
 import { ObstacleManager } from './obstacles'
 import { Bird } from './bird'
 import { Powerup, PowerupManager } from './powerup'
-
+import { DayLevel, NightLevel } from './scenes/levels'
 
 export class Game {
-    engine: Engine
-    // bgDaytime: BgDaytime
-    obstacle_manager: ObstacleManager
-    powerup_manager: PowerupManager
-    bird: Bird
-   
-    constructor() {
-        const groundpos = 397
-        this.engine = new Engine({ width: innerWidth, height: innerHeight });
-        this.engine.start(ResourceLoader).then(() => { this.gameloop() });
-        
-        // this.background = new Background(this.engine, 50,50, 200, 200, Color.Green)
-        this.obstacle_manager = new ObstacleManager(this.engine, this.bird, 150);        
-        this.powerup_manager = new PowerupManager(this.engine, this.bird)
-        this.bird = new Bird(this.engine, this.obstacle_manager, 150, groundpos, 200, 550, Color.Green );
-        this.engine.showDebug(true)   
-    }
+  engine: Engine
+  obstacle_manager: ObstacleManager
+  powerup_manager: PowerupManager
+  bird: Bird
+  groundpos: number
+  currentLevel: Scene
 
-    everythingLoaded(){
-        this.engine.add('bgDaytime', new BgDaytime())
-    }
+  constructor() {
+    this.groundpos = 397
+    this.engine = new Engine({ width: innerWidth, height: innerHeight });
+    this.engine.start(ResourceLoader).then(() => {
+      this.gameloop();
+      this.everythingLoaded();
+    });
+
+  }
+
+  everythingLoaded() {
+    this.engine.add('daylevel', new DayLevel());
+    this.engine.add('nightlevel', new NightLevel());
+    this.engine.goToScene('daylevel');
+    //switch levels
+    this.currentLevel = this.engine.scenes.daylevel
+
+    setInterval(() => {
+      if (this.currentLevel === this.engine.scenes.daylevel) {
+        this.engine.goToScene('nightlevel')
+        this.currentLevel = this.engine.scenes.nightlevel
+      } else {
+        this.engine.goToScene('daylevel')
+        this.currentLevel = this.engine.scenes.daylevel
+      }
+    }, 3000)
+
+        this.obstacle_manager = new ObstacleManager(this.engine, this.bird, 150);
+        this.powerup_manager = new PowerupManager(this.engine, this.bird)
+        this.bird = new Bird(this.engine, this.obstacle_manager, 150, this.groundpos, 200, 550, Color.Green);
+  }
 
     startGame() {
-        const background = new Actor({
-            width:innerWidth,
-            height:innerHeight,   
-        })
-    }
-
-    updateGame(){
+      console.log('game started!')
     }
 
     gameloop() {
-        this.startGame();
-        }
+      this.startGame();
+
     }
-    
+  }
+
 new Game()

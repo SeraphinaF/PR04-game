@@ -1,15 +1,17 @@
 import { ImageSource, Sound, Resource, Loader } from 'excalibur'
-import backgroundImage from '../images/background.png'
+import bgDayImage from '../images/bgDay.png'
+import bgNightImage from '../images/bgNight.png'
 import birdImage from '../images/kangaroo.png'
 import obstacleImage from '../images/tree.png'
 import appleImage from '../images/apple.png'
 
 const Resources = {
-    Background: new ImageSource(backgroundImage),
+    BgDay: new ImageSource(bgDayImage),
+    BgNight: new ImageSource(bgNightImage),
     Bird: new ImageSource(birdImage),
     Obstacle: new ImageSource(obstacleImage),
     Powerup: new ImageSource(appleImage)
 }
-const ResourceLoader = new Loader([Resources.Background, Resources.Bird, Resources.Obstacle, Resources.Powerup])
+const ResourceLoader = new Loader([Resources.BgDay, Resources.BgNight, Resources.Bird, Resources.Obstacle, Resources.Powerup])
 
 export { Resources, ResourceLoader }
