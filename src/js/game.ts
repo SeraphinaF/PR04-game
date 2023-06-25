@@ -1,10 +1,11 @@
-// import '../css/style.css'
-import { Actor, Engine, Vector, Color, Input, Scene } from "excalibur"
+
+import { Actor, Engine, Vector, Color, Input, Scene, Label, Font } from "excalibur"
 import { Resources, ResourceLoader } from "./resources"
 import { ObstacleManager } from './obstacles'
 import { Bird } from './bird'
 import { Powerup, PowerupManager } from './powerup'
 import { DayLevel, NightLevel } from './scenes/levels'
+
 
 export class Game {
   engine: Engine
@@ -14,6 +15,7 @@ export class Game {
   groundpos: number
   currentLevel: Scene
 
+
   constructor() {
     this.groundpos = 397
     this.engine = new Engine({ width: innerWidth, height: innerHeight });
@@ -22,7 +24,9 @@ export class Game {
       this.everythingLoaded();
     });
 
+
   }
+
 
   everythingLoaded() {
     this.engine.add('daylevel', new DayLevel());
@@ -31,29 +35,50 @@ export class Game {
     //switch levels
     this.currentLevel = this.engine.scenes.daylevel
 
-    setInterval(() => {
-      if (this.currentLevel === this.engine.scenes.daylevel) {
-        this.engine.goToScene('nightlevel')
-        this.currentLevel = this.engine.scenes.nightlevel
-      } else {
-        this.engine.goToScene('daylevel')
-        this.currentLevel = this.engine.scenes.daylevel
-      }
-    }, 3000)
+
+    // setInterval(() => {
+    //   if (this.currentLevel === this.engine.scenes.daylevel) {
+    //     this.engine.goToScene('nightlevel')
+    //     this.currentLevel = this.engine.scenes.nightlevel
+    //   } else {
+    //     this.engine.goToScene('daylevel')
+    //     this.currentLevel = this.engine.scenes.daylevel
+    //   }
+    // }, 3000)
+
 
         this.obstacle_manager = new ObstacleManager(this.engine, this.bird, 150);
         this.powerup_manager = new PowerupManager(this.engine, this.bird)
-        this.bird = new Bird(this.engine, this.obstacle_manager, 150, this.groundpos, 200, 550, Color.Green);
+        this.bird = new Bird(this.engine, this, this.obstacle_manager, 150, this.groundpos, 200, 550, Color.Green);
   }
+
 
     startGame() {
       console.log('game started!')
     }
 
+
     gameloop() {
       this.startGame();
 
+
+    }
+    gameOver():boolean {
+      let GameOverTxt = new Label({
+        text: 'GAME OVER... Reload to start again',
+        pos: new Vector(200, 300),
+        font: new Font({
+          family: 'impact',
+          size: 50
+        })
+      });
+      this.engine.currentScene.add(GameOverTxt)
+      console.log('GAME OVER!')
+      this.bird.kill()
+    
+      return true
     }
   }
+
 
 new Game()

@@ -6,21 +6,24 @@ export class ObstacleManager {
     obstacles: Array<Actor>
     birdPos: number
     score: number
+    level: number
     engine: Engine
     bird: Bird
     tree: Tree
     scoreTrigger: number
     scoreLabel: Label
+    levelLabel : Label
 
     constructor(engine: Engine, bird: Bird, bird_x: number) {
         this.birdPos = bird_x
         this.obstacles = []
         this.score = 0
+        this.level = 0
         this.engine = engine
         this.bird = bird
         this.scoreTrigger = this.scoreTrigger
         
-        const distance_between = 350
+        const distance_between = 500
         for (let i = 0; i < 4; i++) {
             let tree = new Tree(
                 400 + distance_between * i,
@@ -44,6 +47,7 @@ export class ObstacleManager {
                     console.log(this.score)
                     console.log('ik ben zoo getriggered')
                     this.showScore()
+                    this.levelUp()
                     if (this.score % 2 === 0 && this.score > 0 ){
                         // tree.vel.x = -150
                         console.log("added speed!")
@@ -76,6 +80,24 @@ export class ObstacleManager {
         return this.score
     }
 
+    levelUp(){
+        if(this.levelLabel && this.score %15 === 0){
+            this.levelLabel.text = `Level: ${this.level}`
+            this.level++
+        }else{
+            this.levelLabel = new Label({
+                text:`Level:${this.level}`,
+                pos: new Vector (250,100),
+                font: new Font({
+                    family:'impact',
+                    size: 50
+                })
+            });
+            this.engine.currentScene.add(this.levelLabel)
+        }
+        return this.level
+    }     
+
     test() {
         console.log('hoi')
     }
@@ -96,7 +118,7 @@ export class Tree extends Actor {
 
     onPostUpdate(_engine: Engine, _delta: number): void {
         if (this.pos.x < -30){
-            this.pos.x = 1400
+            this.pos.x = 2000
         }
     }
 }

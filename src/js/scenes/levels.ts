@@ -4,7 +4,6 @@ import { BgNighttime } from '../background'
 
 
 export class DayLevel extends Scene {
-
     engine: Engine
     bgDayTime: BgDaytime
 
