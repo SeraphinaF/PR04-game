@@ -4,9 +4,9 @@ import { Game } from "./game"
 import { Powerup } from "./powerup"
 import { Tree, ObstacleManager } from "./obstacles"
 
-let gravity = 0.3; // Adjust the gravity strength as needed
+let gravity = 0.5; // Adjust the gravity strength as needed
 let jumpVelocity = -18; // Adjust the initial jump velocity as needed
-let maxFallVelocity = 12; // Adjust the maximum fall velocity as needed
+let maxFallVelocity = 10; // Adjust the maximum fall velocity as needed
 
 export class Bird extends Actor {
   groundPos: number
@@ -52,7 +52,7 @@ export class Bird extends Actor {
       this.groundPos = 150
       this.obstacleManager.obstacles.forEach((obstacle) => {
         obstacle.vel = new Vector(-460, 0)
-        jumpVelocity = -17;
+        jumpVelocity = -13;
       })
       setTimeout(() => {
         this.isFlying = false;
@@ -68,7 +68,7 @@ export class Bird extends Actor {
   hitTree(event) {
     if (event.other instanceof Tree) {
       console.log('oh no I am dead')
-      this.game.gameOver()
+      // this.game.gameOver()
     }
   }
 
