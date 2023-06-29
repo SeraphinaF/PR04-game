@@ -5,7 +5,7 @@ import { Powerup } from "./powerup"
 import { Tree, ObstacleManager } from "./obstacles"
 
 let gravity = 0.5; // Adjust the gravity strength as needed
-let jumpVelocity = -18; // Adjust the initial jump velocity as needed
+let jumpVelocity = -19; // Adjust the initial jump velocity as needed
 let maxFallVelocity = 10; // Adjust the maximum fall velocity as needed
 
 export class Bird extends Actor {
@@ -68,7 +68,7 @@ export class Bird extends Actor {
   hitTree(event) {
     if (event.other instanceof Tree) {
       console.log('oh no I am dead')
-      // this.game.gameOver()
+      this.game.gameOver()
     }
   }
 
