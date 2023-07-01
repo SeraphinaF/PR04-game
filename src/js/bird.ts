@@ -4,7 +4,7 @@ import { Game } from "./game"
 import { Powerup } from "./powerup"
 import { Tree, ObstacleManager } from "./obstacles"
 
-let gravity = 0.5; // Adjust the gravity strength as needed
+let gravity = 0.3; // Adjust the gravity strength as needed
 let jumpVelocity = -19; // Adjust the initial jump velocity as needed
 let maxFallVelocity = 10; // Adjust the maximum fall velocity as needed
 
